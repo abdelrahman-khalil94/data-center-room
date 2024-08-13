@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.room-outlines,
+.room-rack-outlines,
+.in-room-cooler-outlines{
+    stroke-width: 8;
+}
+
+
+.room-outlines,
+.rack-base-line,
+.generic-equipment-base-line{
+    stroke:#808080;
+}
+
+.rack-base-line,
+.in-room-cooler-base-line{
+    stroke-width: 14;
+}
+
+.power-panel-base-line,
+.pdu-base-line,
+.generic-equipment-base-line{
+    stroke-width: 6;
+}
+
+.row-base-line{
+    stroke:#000;
+    stroke-width: 2;
+}
+
+.room-row-main{
+    fill: #E0E0D7;
+}
+
+.power-panel-outlines,
+.pdu-outlines,
+.generic-equipment-outlines{
+    stroke-width: 2;
+}
+
+.power-panel-outlines,
+.pdu-outlines,
+.generic-equipment-outlines,
+.room-rack-outlines,
+.in-room-cooler-outlines{
+    fill: rgba(255, 255, 255, 0);
+}
+
+.room-rack-outlines,
+.generic-equipment-outlines,
+.perforated-ceiling-tile,
+.perforated-floor-tile{
+    stroke:#d6d6d6;
+    
+}
+.room-rack-main,
+.room-row-main
+.generic-equipment-main,
+.in-room-cooler-main{
+    fill: #fff;
+}
+
+.power-panel-base, .pdu-base{
+    fill: #fff;
+}
+
+.power-panel-outlines, .pdu-outlines{
+    stroke:#BDE8A7;
+}
+.power-panel-base-line, .pdu-base-line{
+    stroke:#74e03e;
+    
+}
+
+.in-room-cooler-outlines{
+    stroke:#ABD3F1;
+}
+
+.in-room-cooler-base-line{
+    stroke:#58adee;
+}
+
+.perforated-ceiling-tile, .perforated-floor-tile{
+    stroke: 1;
+    fill: #FAFAFA;
+}
+.selected-asset{
+    fill:rgba(55, 168, 255, 0.5);
+}
+
+// .room-container{
+//     display: flex;
+//     justify-content: center;
+// }

@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-center">
+  <svg width="1700" height="700" viewBox="-50 -150 1700 850" fill="none" click-stop-propagation>
+
+    <g class="room">
+      <path class="room-outlines" [attr.d]="serverRoom.mainPath" />
+      <g class="perforated-ceiling-tile-group"
+        *ngFor="let child of serverRoom.children | assetTypeFilter: PerforatedCeilingTile.type; let i=index">
+        <title>{{child.displayName}}</title>
+        <path class="perforated-ceiling-tile" [attr.d]="child.mainPath" click-stop-propagation />
+      </g>
+      <g class="perforated-floor-tile-group"
+        *ngFor="let child of serverRoom.children | assetTypeFilter: PerforatedFloorTile.type; let i=index">
+        <title>{{child.displayName}}</title>
+        <path class="perforated-floor-tile" [attr.d]="child.mainPath" click-stop-propagation />
+      </g>
+
+    </g>
+
+    <g class="rows" *ngFor="let child of serverRoom.children | assetTypeFilter: Row.type; let i=index">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="room-row-main" [attr.d]="child.mainPath" />
+      <path class="row-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="room-row-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'" />
+    </g>
+
+    <g class="room-racks" *ngFor="let child of serverRoom.children | assetTypeFilter: Rack.type; let i=index">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="room-rack-main" [attr.d]="child.mainPath" />
+      <path class="rack-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="room-rack-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'"
+        click-stop-propagation />
+    </g>
+
+    <g class="power-panels" *ngFor="let child of serverRoom.children | assetTypeFilter: PowerPanel.type; let i=index"
+      (click)="onClickPowerPanel(child.id)">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="power-panel-main" [attr.d]="child.mainPath" />
+      <path class="power-panel-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="power-panel-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'"
+        click-stop-propagation />
+    </g>
+
+    <g class="pdus" *ngFor="let child of serverRoom.children | assetTypeFilter: PDU.type; let i=index">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="pdu-main" [attr.d]="child.mainPath" />
+      <path class="pdu-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="pdu-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'"
+        click-stop-propagation />
+    </g>
+
+    <g class="generic-equipment-group"
+      *ngFor="let child of serverRoom.children | assetTypeFilter: GenericEquipment.type; let i=index">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="generic-equipment-main" [attr.d]="child.mainPath" />
+      <path class="generic-equipment-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="generic-equipment-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'"
+        click-stop-propagation />
+    </g>
+
+    <g class="in-room-cooler-group"
+      *ngFor="let child of serverRoom.children | assetTypeFilter: InRoomCooler.type; let i=index">
+      <title>{{child.displayName}}</title>
+      <defs>
+        <clipPath [id]="child.id">
+          <path [attr.d]="child.mainPath" />
+        </clipPath>
+      </defs>
+      <path class="in-room-cooler-main" [attr.d]="child.mainPath" />
+      <path class="in-room-cooler-base-line" [attr.d]="child.basePath" [attr.clip-path]="'url(#' + child.id + ')'" />
+      <path class="in-room-cooler-outlines" [attr.d]="child.mainPath" [attr.clip-path]="'url(#' + child.id + ')'"
+        click-stop-propagation />
+    </g>
+  </svg>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div *ngIf="selectedAsset?.id" class="detailed-view d-flex justify-content-center mt-5 mb-5" style="width: 1320px;">
+    <img src="assets/power-panel.png" alt="" width="50%" height="400px" class="g-0 me-5">
+    <table class="table table-striped g-0 me-3">
+      <tbody>
+        <tr>
+          <td>Type</td>
+          <td>{{selectedAsset. displayName}}</td>
+        </tr>
+        <tr>
+          <td>Install Date</td>
+          <td>{{selectedAsset. installDate}}</td>
+        </tr>
+        <tr>
+          <td>Position Top Left-X</td>
+          <td>{{selectedAsset. positionTopLeftX}}</td>
+        </tr>
+        <tr>
+          <td>Position Top Left-Y</td>
+          <td>{{selectedAsset. positionTopLeftY}}</td>
+        </tr>
+        <tr>
+          <td>Width</td>
+          <td>{{selectedAsset. width}} m</td>
+        </tr>
+        <tr>
+          <td>Depth</td>
+          <td>{{selectedAsset. depth}} m</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>{{selectedAsset. weight}} kg</td>
+        </tr>
+        <tr>
+          <td>Input Voltage</td>
+          <td>{{selectedAsset. inputVoltage}} Volt</td>
+        </tr>
+        <tr>
+          <td>Input Frequency</td>
+          <td>{{selectedAsset. inputFrequency}} HZ</td>
+        </tr>
+        <tr>
+          <td>Output Voltage</td>
+          <td>{{selectedAsset. outputVoltage}} Volt</td>
+        </tr>
+        <tr>
+          <td>Output Frequency</td>
+          <td>{{selectedAsset. outputFrequency}} HZ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
